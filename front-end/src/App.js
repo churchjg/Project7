@@ -8,11 +8,10 @@ import Meal from './Components/Meal'
 import Homepage from './Components/Homepage'
 import { Route, Link } from 'react-router-dom'
 import List from './Components/List'
+import MealList from './Components/MealList'
 
 
 let url = "https://getcookingwithjon.herokuapp.com/"
-
-
 
 class App extends Component {
   constructor() {
@@ -51,14 +50,13 @@ class App extends Component {
   }
 
   fetchRandomMeal = () => {
-    fetch(`${url}`)
+    fetch(`${url} /name/random`)
       .then(res => res.json())
-      .then(data => {
+      .then(res => {
+        console.log(res)
         this.setState({
-          mealId: data.id
+          mealId: res.id
         })
-        console.log(data)
-
       })
   }
 
@@ -82,11 +80,11 @@ class App extends Component {
               render={() => <List listName={this.state.browseSelection} url={url} />}
               exact
             />
-            <Route path="/name/"
+            <Route path="/name/random"
               render={() => <Meal url={url} id={this.state.mealId} />}
               exact
             />
-            <Route path={`/name/:id${this.state.formInput}`}
+            <Route path={`/name/id/${this.state.formInput}`}
             render={() => <Meal url={url} id={this.state.formInput} />} 
             exact
           />

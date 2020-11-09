@@ -8,10 +8,11 @@ function Sidebar(props) {
         <Nav>
             <Nav.Item>
                 <h3>Browse Recipes</h3>
-                <Nav.Link as={Link} to="name/" onClick={() => props.selectList("name")}>Dishes</Nav.Link>
-                <Nav.Link as={Link} to="video/" onClick={() => props.selectList("video")}>Videos</Nav.Link>
-                <Nav.Link as={Link} to="category/" onClick={() => props.selectList("category")}>Categories</Nav.Link>
-                <Nav.Link as={Link} to="area/" onClick={() => props.selectList("area")}>Food by Country</Nav.Link>
+                <Nav.Link as={Link} to="/name/random" onClick={() => props.setId()}>Random Recipe</Nav.Link>
+                <Nav.Link as={Link} to="/name/" onClick={() => props.selectList("name")}>Dishes</Nav.Link>
+                <Nav.Link as={Link} to="/video/" onClick={() => props.selectList("video")}>Videos</Nav.Link>
+                <Nav.Link as={Link} to="/category/" onClick={() => props.selectList("category")}>Categories</Nav.Link>
+                <Nav.Link as={Link} to="/area/" onClick={() => props.selectList("area")}>Food by Country</Nav.Link>
             </Nav.Item>
         </Nav>
     )

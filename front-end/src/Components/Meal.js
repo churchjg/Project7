@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import { json } from 'body-parser'
-// import { Container, Row, Col, Badge } from 'react-bootstrap'
-// import Image from 'react-bootstrap/Image'
+//import { json } from 'body-parser'
+import { Container, Row, Col, Badge } from 'react-bootstrap'
+import Image from 'react-bootstrap/Image'
 import ImageGallery from './ImageGallery'
-import { Route, Link } from 'react-router-dom'
+import { Route, } from 'react-router-dom'
 import Homepage from './Homepage'
 
-
-let url = "https://getcookingwithjon.herokuapp.com/"
 
 export class Meal extends Component {
     constructor(props) {
@@ -24,83 +22,33 @@ export class Meal extends Component {
             , ready: false
         }
     }
-    componentDidMount() {
-        fetch(`${url}`)
+    
+
+    fetchMeal = () => {
+        fetch(`${this.props.url}/name/${this.props.id}`)
             .then(res => res.json())
-            .then(res => {
-                this.data = res
-                console.log(res)
+            .then(res =>{
                 this.setState({
-                    ready: true
-                })
-            })
-    }
-
-    fetchMeal = (id, name, image, category, tags, instructions, area, video, url) => {
-        this.setState({
-            id: id
-            , name: name
-            , image: image
-            , category: category
-            , tags: tags
-            , instructions: instructions
-            , area: area
-            , video: video
-            , url: url
+            id: res.id
+            , name: res.name
+            , image: res.image
+            , category: res.category
+            , tags: res.tags
+            , instructions: res.instructions
+            , area: res.area
+            , video: res.video
         })
+    })
+}
+componentDidMount = () => {
+    this.fetchMeal() 
+}
+
+componentDidUpdate = props => {
+    if (props.id !== this.props.id){
+        this.fetchMeal()
     }
-
-    renderHomepage = () => {
-        if (this.state.ready === true) {
-            return (
-                <Route path="/"
-                    render={() => <Homepage meal={this.data} fetchMeal={this.fetchMeal} />}
-                    exact
-                />
-            )
-        } else { return <h1>Page Loading....</h1> }
-    }
-
-    render() {
-        return (
-            <main>
-                {this.renderHomepage()}
-                <Route exact path={`/name/${this.state.id}`}
-                    render={(routerProps) => <Meal info={this.state}
-                        {...routerProps}
-                    />}
-                />
-            </main>
-        )
-    }
-
-    /*
-
-  fetchMeal = () => {
-      fetch(`${this.props.url}name/:id${this.props.id}`)
-          .then(res => res.json())
-          .then(data => {
-              this.setState({
-                  id: data._id
-                  , name: data.name
-                  , image: data.image
-                  , category: data.category
-                  , tags: data.tags
-                  , instructions: data.instructions
-                  , area: data.area
-                  , video: data.video
-              })
-          })
-  }
-  componentDidMount = () => {
-      this.fetchMeal()
-  }
-
-  componentDidUpdate = props => {
-      if (props.id !== this.props.id) {
-          this.fetchMeal()
-      }
-  }
+}
 
 
   render() {
@@ -118,10 +66,22 @@ export class Meal extends Component {
                   </Col>
                   <Col xs="4" />
               </Row>
+              <Row className="justify-content-center">
+                       {this.state.category !== "" && this.state.category !== undefined ? <h5>Categories: {this.state.category}</h5> : null} 
+                    </Row>
+                    <Row className="justify-content-center">
+                       {this.state.area !== "" && this.state.area !== undefined ? <h4>Culture: {this.state.area}</h4> : null} 
+                    </Row>
+                    <Row className="justify-content-center">
+                       {this.state.instructions !== "" && this.state.instructions !== undefined ? <h4>Cooking Instructions: {this.state.instructions}</h4> : null} 
+                    </Row>
+                    <Row className="justify-content-center">
+                       {this.state.video !== "" && this.state.video !== undefined ? <h4>Media: {this.state.video}</h4> : null} 
+                    </Row>
               </Container>
           )} else { return null }
   }
 }
-*/
-}
+
+
 export default Meal

@@ -3,7 +3,7 @@ import Image from 'react-bootstrap/Image'
 
 
 
-export default function Images(props) {
+export default function ImageGallery(props) {
 
     let images = props.image
 
