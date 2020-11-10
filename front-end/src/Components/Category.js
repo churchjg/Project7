@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Col } from 'react-bootstrap'
+import "./Category.css"
 
 let url = "https://getcookingwithjon.herokuapp.com/"
 
@@ -10,8 +11,10 @@ export class Category extends Component {
         this.state = {
             listName: this.props.listName
             , recipes: []
+            , categories: []
         }
     }
+
 
 
     shuffleCat = (array) => {
@@ -22,8 +25,6 @@ export class Category extends Component {
         return array
     }
 
-
-
     fetchCatList = () => {
         fetch(`${url}category/`)
             .then(res => res.json())
@@ -31,8 +32,9 @@ export class Category extends Component {
                 res = this.shuffleCat(res)
                 this.setState({
                     ready: true
-                    , recipes: (res.splice(0, 20))
+                    , recipes: (res.splice(0, 25))
                 })
+                this.removeDuplicates()
             })
 
     }
@@ -40,15 +42,34 @@ export class Category extends Component {
         this.fetchCatList()
     }
 
+    removeDuplicates = () => {
+        const array = []
+        this.state.recipes.map(recipe =>
+            array.push(recipe.category)
+        )
+        
+        const newData = new Set(array)
+        const backToArray = [...newData]
+        console.log(backToArray)
+        this.setState({
+            categories: backToArray
+        })
+
+    }
+
     render() {
         return (
-            <Container>
+            <Container className="container">
                 <Col>
-                    <div style={{ overflow: "scroll", paddingLeft: 20, textAlign: "center" }}>
-                        <ul style={{ listStyle: "none", fontSize: "20px", paddingTop: 20, textAlign: "center" }}>
+                    <div style={{ paddingLeft: 20, textAlign: "center" }}>
+                        <li style={{ listStyle: "none", fontSize: "20px", paddingTop: 20, textAlign: "center" }}>
                             <h2>Categories:</h2>
-                            {this.state.recipes.map(recipe => <li>{recipe.category}</li>)}
-                        </ul>
+                            <Col>
+                                <ol className="column">
+                                    {this.state.categories}
+                                </ol>
+                            </Col>
+                        </li>
                     </div>
                 </Col>
             </Container>

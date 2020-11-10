@@ -12,7 +12,7 @@ export class Homepage extends Component {
             , recipes: []
         }
     }
-    shuffleCat = (array) => {
+    shuffleHome = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
@@ -20,11 +20,12 @@ export class Homepage extends Component {
         return array
     }
 
+    
     fetchHomeList = () => {
         fetch(`${url}Home/`)
             .then(res => res.json())
             .then(res => {
-                res = this.shuffleCat(res)
+                res = this.shuffleHome(res)
                 this.setState({
                     ready: true
                     , recipes: res.splice(0, 6)

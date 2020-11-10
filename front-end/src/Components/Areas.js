@@ -13,12 +13,19 @@ export class Areas extends Component {
         }
     }
 
-   
+    shuffleArea = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array
+    }
+    
     fetchAreaList = () => {
         fetch(`${url}areas/`)
             .then(res => res.json())
             .then(res => {
-                //make sure to randomize res array
+                res = this.shuffleArea(res)
                 this.setState({
                     ready: true
                     , recipes: /*this.removeDuplicates */(res.splice(0, 20))

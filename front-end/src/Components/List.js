@@ -12,8 +12,8 @@ export class List extends Component {
             , recipes: []
         }
     }
-    
-    shuffleCat = (array) => {
+
+    shuffleList = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
@@ -25,7 +25,7 @@ export class List extends Component {
         fetch(`${url}name/`)
             .then(res => res.json())
             .then(res => {
-                res = this.shuffleCat(res)
+                res = this.shuffleList(res)
                 this.setState({
                     ready: true
                     , recipes: res.splice(0, 20)
