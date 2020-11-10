@@ -48,17 +48,21 @@ class App extends Component {
       mealId: id
     })
   }
-
+/*
   fetchRandomMeal = () => {
-    fetch(`${url} /name/random`)
+    fetch(`${url}name/random`)
       .then(res => res.json())
       .then(res => {
-        console.log(res)
+        let min = 0
+        let max = res.length -1
+        let random = Math.floor(Math.random() * (max - min + 1)) + min;
+        console.log(res[random])
         this.setState({
-          mealId: res.id
+          mealId: res[random]
         })
       })
   }
+  */
 
   render(routerProps) {
     return (
