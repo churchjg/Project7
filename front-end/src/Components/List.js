@@ -1,91 +1,101 @@
 import React, { Component } from 'react'
+let url = "https://getcookingwithjon.herokuapp.com/"
 
 export class List extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            listName: this.props.listName
-            , recipes: []
+            name: ''
+            , ready: false
         }
-        this.url = this.props.url
     }
 
-    componentDidMount() {
-
-        let listName = ""
-        if (this.props.listName !== "") {
-            listName = this.props.listName
-        }
-        else {
-            listName = localStorage.getItem("listName")
-        }
-
-        fetch(`${this.url}${listName}`)
+    fetchMealNames = () => {
+        fetch(`${url}name/`)
             .then(res => res.json())
-            .then(data => {
-                console.log(data)
+            .then(res => {
+                let min = 0
+                let max = res.length - 1
+                let random = Math.floor(Math.random() * (max - min + 1)) + min;
+                console.log(res[random])
                 this.setState({
-                    recipes: data
+                    ready: true
+                    , nameId: res[random]
                 })
             })
     }
-
-    /*
-    fetch(`${this.url}`)
-    .then(res => res.json())
-    .then(data => {
-        let theMeals = {
-            id: data._id
-            , name: data.name
-            , image: data.image
-            , category: data.category
-            , tags: data.tags
-            , instructions: data.instructions
-            , area: data.area
-            , video: data.video
-            let foods = this.state.recipes
-        }
-    foods.push(theMeals)
-    this.setState({
-                recipes: foods
-            })
-        })
-}
-*/
-componentDidUpdate(props) {
-    if (props.listName !== this.props.listName) {
-        console.log(props.listName)
-        console.log(this.props.listName)
-        fetch(`${this.url}${this.props.listName}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                this.setState({
-                    recipes: data
-                })
-            })
-
-        localStorage.setItem("listName", `${this.props.listName}`)
+    componentDidMount = () => {
+        this.fetchMealNames()
     }
-}
-
-    /*setList(){
-        let listRecipes = this.state.recipes.map((val, idx) => {
-            if (val !== ""){
-            return <li key={idx}>{val}</li>
-            }
-        })
-        return listRecipes
-    }
-
     render() {
-        return (
-            <div>
-                {this.setList()}
-            </div>
-        )
+        if (this.state.ready === true) {
+            console.log(this.state.nameId.name)
+            return (
+                <div style={{ overflow: "scroll", paddingLeft: 20 }}>
+                    <ul style={{ listStyle: "none", fontSize: "20px", paddingTop: 20 }}>
+                        {this.state.nameId}
+                    </ul>
+                </div>
+            )
+        } else { return null }
+        /*
+                componentDidMount() {
+                    
+                    let listName = ""
+                    if (this.props.listName !== "") {
+                        listName = this.props.listName
+                    }
+                    else {
+                        listName = localStorage.getItem("listName")
+                    }
+        
+                    fetch(`${this.url}name/${listName}`)
+                        .then(res => res.json())
+                        .then(res => {
+                            this.setState({
+                                recipes: res.name
+                            })
+                        })
+                    localStorage.setItem("listName", `${this.props.listName}`)
+                }
+        
+        
+                componentDidUpdate(props) {
+                    if (props.listName !== this.props.listName) {
+        
+                        fetch(`${this.url}name/${this.props.listName}`)
+                            .then(res => res.json())
+                            .then(res => {
+                                this.setState({
+                                    recipes: res.name
+                                })
+                            })
+        
+                        localStorage.setItem("listName", `${this.props.listName}`)
+                    }
+                }
+        
+                setList() {
+                    let listRecipes = this.state.recipes.map((val, idx) => {
+                        let newRecipe
+                        if (val !== "") {
+                            newRecipe = <li key={idx}>{val}</li>
+                        }
+                        return newRecipe
+                    })
+                    return listRecipes
+                }
+        
+                render() {
+                    return (
+                        <div style={{ overflow: "scroll", paddingLeft: 20 }}>
+                            <ul style={{ listStyle: "none", fontSize: "20px", paddingTop: 20 }}>
+                                {this.setList()}
+                            </ul>
+                        </div>
+                    )
+                }
+            } */
     }
-    */
 }
-
 export default List
