@@ -24,6 +24,12 @@ export class SearchForm extends Component {
             dropdown: evt.target.value
         })
     }
+    
+    mealId = evt => {
+        this.setState({
+            id: evt.target.value
+        })
+    }
 
     submitForm = (evt) => {
         evt.preventDefault()
@@ -31,7 +37,7 @@ export class SearchForm extends Component {
         this.props.sendInput(this.state.input)
         console.log(this.state.input)
         this.props.sendInput(this.state)
-        this.props.food.push(`/name/${this.state.dropdown}/${this.state.input}`)
+        this.props.mealId.push(`/name/${this.state.dropdown}/${this.state.input}/${this.state.mealId}`)
 
     }
 
@@ -40,7 +46,7 @@ export class SearchForm extends Component {
             <Form onSubmit={this.submitForm}>
                 <Form.Control as="select" title="Narrow Your Search" id="basic-nav-dropdown" onChange={this.dropdownChange}>
                     <option>Narrow Your Search</option>
-                    <option value="name">Dishes</option>
+                    <option value="name">Name</option>
                     <option value="id">Recipe ID</option>
                     <option value="image">Images</option>
                     <option value="category">Categories</option>
