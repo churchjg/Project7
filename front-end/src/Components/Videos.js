@@ -4,7 +4,7 @@ import { Container, Col } from 'react-bootstrap'
 let url = "https://getcookingwithjon.herokuapp.com/"
 
 
-export class List extends Component {
+export class Videos extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -13,39 +13,22 @@ export class List extends Component {
         }
     }
 
-    fetchNameList = () => {
-        fetch(`${url}name/`)
+   
+    fetchVidList = () => {
+        fetch(`${url}video/`)
             .then(res => res.json())
             .then(res => {
                 //make sure to randomize res array
-
                 this.setState({
                     ready: true
-                    , recipes: res.splice(0, 20)
+                    , recipes: /*this.removeDuplicates */(res.splice(0, 20))
                 })
             })
 
     }
-
     componentDidMount = () => {
-        this.fetchNameList()
+        this.fetchVidList() 
     }
-    /*
-        componentDidUpdate(props) {
-            if (props.listName !== this.props.listName) {
-     
-                fetch(`${this.url}name/${this.props.listName}`)
-                    .then(res => res.json())
-                    .then(res => {
-                        this.setState({
-                            recipes: res
-                        })
-                    })
-     
-                localStorage.setItem("listName", `${this.props.listName}`)
-            }
-        }
-        */
 
     render() {
         return (
@@ -53,8 +36,8 @@ export class List extends Component {
                 <Col>
                     <div style={{ overflow: "scroll", paddingLeft: 20 }}>
                         <ul style={{ listStyle: "none", fontSize: "20px", paddingTop: 20 }}>
-                            <h2>Some Great Dishes:</h2>
-                            {this.state.recipes.map(recipe => <li>{recipe.name}</li>)}
+                            <h2>Learn with Some Pro Chefs!</h2>
+                            {this.state.recipes.map(recipe => <li>{recipe.name}{`      -->      `}{recipe.video}</li>)}
                         </ul>
                     </div>
                 </Col>
@@ -63,4 +46,4 @@ export class List extends Component {
     }
 }
 
-export default List
+export default Videos

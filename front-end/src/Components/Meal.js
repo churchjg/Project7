@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 //import { json } from 'body-parser'
 import { Container, Row, Col, Badge } from 'react-bootstrap'
 import Image from 'react-bootstrap/Image'
-import ImageGallery from './ImageGallery'
+import ImageGallery from './Category'
 import { Route, } from 'react-router-dom'
 import Homepage from './Homepage'
 
@@ -78,7 +78,6 @@ export class Meal extends Component {
                         <h2>{this.state.mealId.name}  </h2>{this.state.mealId.name === true ? <h4><Badge variant="primary">  Recipe</Badge></h4> : null}
                     </Row>
                     <Row sm>
-                        {this.state.mealId.tags === true ? <h5><Badge variant="primary">  Tags</Badge></h5> : null}
                         <Col xs="4" />
                         <Col>
                             <Image fluid src={this.state.mealId.image} />
@@ -90,6 +89,9 @@ export class Meal extends Component {
                     </Row>
                     <Row className="justify-content-center">
                         {this.state.mealId.area !== "" && this.state.mealId.area !== undefined ? <h5>Culture: {this.state.mealId.area}</h5> : null}
+                    </Row>
+                    <Row className="justify-content-center">
+                    {this.state.mealId.tags !== "" && this.state.mealId.tags !== undefined ? <h5>Tags: {this.state.mealId.tags}</h5> : null}
                     </Row>
                     <Row className="justify-content-center">
                         {this.state.mealId.instructions !== "" && this.state.mealId.instructions !== undefined ? <h4>Cooking Instructions:{this.state.mealId.instructions}</h4> : null}

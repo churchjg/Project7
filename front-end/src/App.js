@@ -8,6 +8,9 @@ import Meal from './Components/Meal'
 import Homepage from './Components/Homepage'
 import { Route, Link } from 'react-router-dom'
 import List from './Components/List'
+import Category from './Components/Category'
+import Areas from './Components/Areas'
+import Videos from './Components/Videos'
 import MealList from './Components/MealList'
 
 
@@ -74,7 +77,8 @@ class App extends Component {
         </Row>
         <Row>
           <Col xs="2" id="sidebar">
-            <Sidebar selectList={this.selectList} setMealId={this.fetchRandomMeal} setNameId={this.fetchNameList} />
+            <Sidebar selectList={this.selectList} setMealId={this.fetchRandomMeal} setNameId={this.fetchNameList} setCatId={this.fetchCatList}
+            setAreaId={this.fetchAreaList} setVidId={this.fetchVidList} />
           </Col>
           <Col >
             <Route path="/"
@@ -82,6 +86,18 @@ class App extends Component {
               exact />
             <Route path={`/name/${this.state.browseSelection}`}
               render={() => <List listName={this.state.browseSelection} url={url} setNameId={this.state.recipes} />}
+              exact
+            />
+            <Route path={`/category/${this.state.browseSelection}`}
+              render={() => <Category listName={this.state.browseSelection} url={url} setCatId={this.state.recipes} />}
+              exact
+            />
+             <Route path={`/area/${this.state.browseSelection}`}
+              render={() => <Areas listName={this.state.browseSelection} url={url} setAreaId={this.state.recipes} />}
+              exact
+            />
+             <Route path={`/video/${this.state.browseSelection}`}
+              render={() => <Videos listName={this.state.browseSelection} url={url} setVidId={this.state.recipes} />}
               exact
             />
             <Route path="/name/random"

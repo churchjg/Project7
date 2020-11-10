@@ -11,9 +11,9 @@ function Sidebar(props) {
                 <Nav.Link as={Link} to="/">Home</Nav.Link>
                 <Nav.Link as={Link} to="/name/random" onClick={() => props.setMealId}>Random Recipe</Nav.Link>
                 <Nav.Link as={Link} to="/name/" onClick={() => props.setNameId}>Dishes</Nav.Link>
-                <Nav.Link as={Link} to="/video/" onClick={() => props.selectList("video")}>Videos</Nav.Link>
-                <Nav.Link as={Link} to="/category/" onClick={() => props.selectList("category")}>Categories</Nav.Link>
-                <Nav.Link as={Link} to="/area/" onClick={() => props.selectList("area")}>Food by Country</Nav.Link>
+                <Nav.Link as={Link} to="/video/" onClick={() => props.setVidId}>Videos</Nav.Link>
+                <Nav.Link as={Link} to="/category/" onClick={() => props.setCatId}>Categories</Nav.Link>
+                <Nav.Link as={Link} to="/area/" onClick={() => props.setAreaId}>Food by Country</Nav.Link>
                 <h3>Advanced</h3>
             </Nav.Item>
         </Nav>
