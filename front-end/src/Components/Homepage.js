@@ -45,7 +45,7 @@ export class Homepage extends Component {
                 {this.state.recipes.map(recipe =>
                     <Col>
                         <Row className="justify-content-center">
-                            <h3>{recipe.name} {` -- `} {`(`} {recipe.category} {`)`}</h3>
+                            <h3>{recipe.name} {` - `} {`(`} {recipe.category} {`)`}</h3>
                         </Row>
                         <Row sm>
                             <Col xs="3" />
