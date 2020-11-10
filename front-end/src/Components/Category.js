@@ -13,21 +13,31 @@ export class Category extends Component {
         }
     }
 
-   
+
+    shuffleCat = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array
+    }
+
+
+
     fetchCatList = () => {
         fetch(`${url}category/`)
             .then(res => res.json())
             .then(res => {
-                //make sure to randomize res array
+                res = this.shuffleCat(res)
                 this.setState({
                     ready: true
-                    , recipes: /*this.removeDuplicates */(res.splice(0, 20))
+                    , recipes: (res.splice(0, 20))
                 })
             })
 
     }
     componentDidMount = () => {
-        this.fetchCatList() 
+        this.fetchCatList()
     }
 
     render() {
@@ -35,7 +45,7 @@ export class Category extends Component {
             <Container>
                 <Col>
                     <div style={{ overflow: "scroll", paddingLeft: 20, textAlign: "center" }}>
-                        <ul style={{ listStyle: "none", fontSize: "20px", paddingTop: 20, textAlign: "center"}}>
+                        <ul style={{ listStyle: "none", fontSize: "20px", paddingTop: 20, textAlign: "center" }}>
                             <h2>Categories:</h2>
                             {this.state.recipes.map(recipe => <li>{recipe.category}</li>)}
                         </ul>

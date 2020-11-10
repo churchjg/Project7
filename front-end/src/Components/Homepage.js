@@ -12,12 +12,19 @@ export class Homepage extends Component {
             , recipes: []
         }
     }
+    shuffleCat = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array
+    }
 
     fetchHomeList = () => {
         fetch(`${url}Home/`)
             .then(res => res.json())
             .then(res => {
-                //make sure to randomize res array
+                res = this.shuffleCat(res)
                 this.setState({
                     ready: true
                     , recipes: res.splice(0, 6)
