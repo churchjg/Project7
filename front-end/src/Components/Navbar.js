@@ -1,28 +1,21 @@
+
 import React from 'react'
 import Navbar from 'react-bootstrap/Navbar'
-import {Container, Row, Col, FormControl} from 'react-bootstrap'
-import NavDropdown from 'react-bootstrap/NavDropdown'
-import Form from 'react-bootstrap/Form'
 import SearchForm from './SearchForm'
-function TopNav(props){
+import { Link } from 'react-router-dom'
+import bgImage from '../../src/Images/balogo.png'
 
+function TopNav(props) {
 
-    return(
-            
-            <Navbar>
-                <style type="text/css">
-                    {`
-                    .navbar {
-                        background-color: red;
-                        margin: 0, auto;
-                    }
-                    `}
-                </style>
-                <Navbar.Brand>Get Cooking!</Navbar.Brand>
+    return (
+        <Navbar style={{ height: "100%", backgroundRepeat: "no-repeat", borderBottom: "3px solid #333333", backgroundImage: `url(${bgImage})`, backgroundPosition: "cover" }} className="justify-content-between">
+            <Navbar.Brand as={Link} to="/" style={{ padding: 20, color: "red" }}></Navbar.Brand>
+            <Navbar.Text style={{ color: "red" , textAlign: "center", fontDecoration: "underline" }}><h1>Cooking with Jon</h1></Navbar.Text>
 
-                <SearchForm sendInput={props.sendInput}/>
-                
-            </Navbar>
+            <SearchForm sendInput={props.sendInput} />
+
+        </Navbar>
     )
 }
+
 export default TopNav

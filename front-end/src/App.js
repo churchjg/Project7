@@ -78,11 +78,14 @@ class App extends Component {
         <Row>
           <Col xs="2" id="sidebar">
             <Sidebar selectList={this.selectList} setMealId={this.fetchRandomMeal} setNameId={this.fetchNameList} setCatId={this.fetchCatList}
-            setAreaId={this.fetchAreaList} setVidId={this.fetchVidList} />
+            setAreaId={this.fetchAreaList} setVidId={this.fetchVidList} setHomeId={this.fetchHomeList} />
           </Col>
           <Col >
             <Route path="/"
-              component={Homepage}
+             
+              exact />
+              <Route path={`/Home/${this.state.browseSelection}`}
+              render={() => <Homepage listName={this.state.browseSelection} url={url} setHomeId={this.state.recipes} />}
               exact />
             <Route path={`/name/${this.state.browseSelection}`}
               render={() => <List listName={this.state.browseSelection} url={url} setNameId={this.state.recipes} />}
