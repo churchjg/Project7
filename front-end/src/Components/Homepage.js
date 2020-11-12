@@ -8,8 +8,7 @@ export class Homepage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            listName: this.props.listName
-            , recipes: []
+            recipes: []
         }
     }
     shuffleHome = (array) => {
@@ -38,15 +37,11 @@ export class Homepage extends Component {
     }
 
 
-    /* <li>{recipe.name}
-    <Image fluid src={recipe.image}></Image>
-    {recipe.category}</li>)}
-</ul>
-</div > */
+   
     render() {
         return (
             <Container className="justify-content-center">
-                <div style={{ overflow: "scroll", paddingRight: 20, textAlign: "center" }}>
+                <div style={{ padding: 0, textAlign: "center" }}>
                     <h1>Welcome! Lets Get Cooking</h1>
                     <h2 style={{textDecoration: "underline"}}>Some Top Recipes</h2>
                 </div>
@@ -56,11 +51,11 @@ export class Homepage extends Component {
                             <h3>{recipe.name} {` - `} {`(`} {recipe.category} {`)`}</h3>
                         </Row>
                         <Row sm>
-                            <Col xs="3" />
+                            <Col xs="4" />
                             <Col>
                                 <Image fluid src={recipe.image} />
                             </Col>
-                            <Col xs="3" />
+                            <Col xs="4" />
                         </Row>
                     </Col >
                 )

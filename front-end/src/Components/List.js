@@ -58,8 +58,8 @@ export class List extends Component {
         return (
             <Container>
                 <Col>
-                    <div style={{ overflow: "scroll", paddingLeft: 20 }}>
-                        <ul style={{ listStyle: "none", fontSize: "20px", paddingTop: 20 }}>
+                    <div style={{ textAlign: "center" }}>
+                        <ul style={{ listStyle: "none", fontSize: "20px", paddingTop: 20, paddingBottom: 20 }}>
                             <h2>Some Great Dishes:</h2>
                             {this.state.recipes.map(recipe => <li>{recipe.name}</li>)}
                         </ul>

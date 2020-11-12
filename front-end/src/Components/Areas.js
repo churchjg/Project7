@@ -10,6 +10,7 @@ export class Areas extends Component {
         this.state = {
             listName: this.props.listName
             , recipes: []
+            , areas: []
         }
     }
 
@@ -20,7 +21,7 @@ export class Areas extends Component {
         }
         return array
     }
-    
+
     fetchAreaList = () => {
         fetch(`${url}areas/`)
             .then(res => res.json())
@@ -28,23 +29,41 @@ export class Areas extends Component {
                 res = this.shuffleArea(res)
                 this.setState({
                     ready: true
-                    , recipes: /*this.removeDuplicates */(res.splice(0, 20))
+                    , recipes: (res.splice(0, 18))
                 })
+                this.removeDuplicates()
             })
 
     }
     componentDidMount = () => {
-        this.fetchAreaList() 
+        this.fetchAreaList()
+    }
+
+    removeDuplicates = () => {
+        const array = []
+        this.state.recipes.map(recipe =>
+            array.push(recipe.area)
+        )
+
+        const newData = new Set(array)
+        const backToArray = [...newData]
+        console.log(backToArray)
+        this.setState({
+            areas: backToArray
+        })
+
     }
 
     render() {
         return (
             <Container>
                 <Col>
-                    <div style={{ overflow: "scroll", paddingLeft: 20, textAlign: "center"}}>
-                        <ul style={{ listStyle: "none", fontSize: "20px", paddingTop: 20, textAlign: "center"}}>
+                    <div style={{ textAlign: "center" }}>
+                        <ul style={{ listStyle: "none", fontSize: "20px", paddingTop: 20, textAlign: "center" }}>
                             <h2>Food By Country:</h2>
-                            {this.state.recipes.map(recipe => <li>{recipe.area}</li>)}
+                            <li style={{ listStyle: "none", fontSize: "20px", paddingTop: 20, textAlign: "center" }}>
+                                {this.state.areas}
+                            </li>
                         </ul>
                     </div>
                 </Col>

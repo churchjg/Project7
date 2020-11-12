@@ -12,30 +12,30 @@ export class SearchForm extends Component {
         }
     }
 
-    inputChange = (evt) => {
-        console.log(evt.target.value)
+    inputChange = (e) => {
+        console.log(e.target.value)
         this.setState({
-            input: evt.target.value
+            input: e.target.value
         })
     }
 
-    dropdownChange = evt => {
+    dropdownChange = e => {
         this.setState({
-            dropdown: evt.target.value
+            dropdown: e.target.value
         })
     }
 
-    mealId = evt => {
+    mealId = e => {
         this.setState({
-            id: evt.target.value
+            id: e.target.value
         })
     }
 
-    submitForm = (evt) => {
-        evt.preventDefault()
+    submitForm = (e) => {
+        e.preventDefault()
         if (this.state.dropdown !== "" && this.state.input !== "") {
             this.props.sendInput(this.state)
-            this.props.history.push(`/name/${this.state.dropdown}/${this.state.input}`)
+            this.props.recipes.push(`name/${this.state.dropdown}${this.state.input}`)
         }
         else { alert("Please select an area from the dropdown and enter the name of the section you would like to search.") }
     }
@@ -43,15 +43,15 @@ export class SearchForm extends Component {
     render() {
         return (
             <Form inline onSubmit={this.submitForm}>
-                <Form.Control style={{ margin: 10 }} size="sm" as="select" title="Narrow Your Search" id="basic-nav-dropdown" onChange={this.dropdownChange}>
+                <Form.Control style={{ margin: 5 , border: "1.5px solid blue" }} size="sm" as="select" title="Narrow Your Search" id="basic-nav-dropdown" onChange={this.dropdownChange}>
                     <option>Narrow Your Search</option>
                     <option value="name">Name</option>
                     <option value="tags">Tags</option>
                     <option value="category">Categories</option>
                     <option value="area">Cultures</option>
                 </Form.Control>
-                <Form.Control style={{margin: 5} } size="sm" type="input" onChange={this.inputChange} />
-                <Button style={{margin: 10, backgroundColor: "#F5F5F5", color: "#333333", border: "none"}} size="sm" type="submit" >Search</Button>
+                <Form.Control style={{margin: 5 , border: "1px solid black"}} size="sm" type="input" onChange={this.inputChange} />
+                <Button style={{margin: 5, backgroundColor: "#F5F5F5", color: "#333333", border: "1.5px solid blue"}} size="sm" type="submit" >Search</Button>
             </Form>
         )
     }

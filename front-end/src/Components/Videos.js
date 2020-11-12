@@ -36,11 +36,13 @@ export class Videos extends Component {
         this.fetchVidList()
     }
 
+
+
     render() {
         return (
             <Container>
                 <Col>
-                    <div style={{ overflow: "scroll", paddingLeft: 20, textAlign: "center" }}>
+                    <div style={{  paddingLeft: 20, textAlign: "center" }}>
                         <ul style={{ listStyle: "none", fontSize: "20px", paddingTop: 20, textAlign: "center" }}>
                             <h2>Learn with Some Pro Chefs!</h2>
                             {this.state.recipes.map(recipe => <li>{recipe.name}{`      -->      `}{recipe.video}</li>)}

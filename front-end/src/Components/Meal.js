@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 //import { json } from 'body-parser'
 import { Container, Row, Col, Badge } from 'react-bootstrap'
 import Image from 'react-bootstrap/Image'
-import ImageGallery from './Category'
-import { Route, } from 'react-router-dom'
-import Homepage from './Homepage'
 
 
+   
 
 let url = "https://getcookingwithjon.herokuapp.com/"
 
@@ -26,25 +24,7 @@ export class Meal extends Component {
         }
     }
 
-    /*
-        fetchMeal = () => {
-            fetch(`${this.props.url}name/${this.props.id}`)
-                .then(res => res.json())
-                .then(res => {
-                    this.setState({
-                        id: res.id
-                        , name: res.name
-                        , image: res.image
-                        , category: res.category
-                        , tags: res.tags
-                        , instructions: res.instructions
-                        , area: res.area
-                        , video: res.video
-                        , ready: true
-                    })
-                })
-        }
-        */
+    
     fetchRandomMeal = () => {
         fetch(`${url}name/random`)
             .then(res => res.json())
@@ -94,7 +74,7 @@ export class Meal extends Component {
                     {this.state.mealId.tags !== "" && this.state.mealId.tags !== undefined ? <h5>Tags: {this.state.mealId.tags}</h5> : null}
                     </Row>
                     <Row className="justify-content-center">
-                        {this.state.mealId.instructions !== "" && this.state.mealId.instructions !== undefined ? <h4>Cooking Instructions:{this.state.mealId.instructions}</h4> : null}
+                        {this.state.mealId.instructions !== "" && this.state.mealId.instructions !== undefined ? <h4>Cooking Instructions: {this.state.mealId.instructions}</h4> : null}
                     </Row>
                     <Row className="justify-content-center">
                         {this.state.mealId.video !== "" && this.state.mealId.video !== undefined ? <h4>Media: {this.state.mealId.video}</h4> : null}
