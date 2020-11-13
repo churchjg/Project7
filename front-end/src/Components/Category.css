@@ -1,0 +1,7 @@
+.cat-column {
+    display: flex;
+    flex-direction: column;
+    font-size: 20;
+    text-align: center;
+
+}

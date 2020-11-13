@@ -19,8 +19,8 @@ function Sidebar(props) {
 
                 <h4 style={{ textDecoration: "underline" }}>Advanced Options</h4>
                 <Nav.Link as={Link} to="/foodInfo/" >Add a New Recipe</Nav.Link>
-                <Nav.Link as={Link} to="/foodAddInfo/add" >Update a Recipe</Nav.Link>
-                <Nav.Link as={Link} to="/foodDelInfo/delete" >Delete a Recipe</Nav.Link>
+                <Nav.Link as={Link} to="/foodInfo/add" >Update a Recipe</Nav.Link>
+                <Nav.Link as={Link} to="/foodInfo/delete" >Delete a Recipe</Nav.Link>
                 </Nav.Item>
         </Nav>
     )

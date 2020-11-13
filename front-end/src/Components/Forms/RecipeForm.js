@@ -14,12 +14,12 @@ export class RecipeForm extends Component {
         }
         if (this.props.method === "PUT"){
             return (<div> <h4>Please enter the details of the recipe to update?</h4>
-            <Form.Control type="input" placeholder="Name (required)" name="add" onChange={this.inputChange} />
+            <Form.Control type="input" placeholder="Name (required)" name="add" onChange={this.pleaseWork} />
             </div>)
         }
         if (this.props.method === "DELETE"){
             return (<div> <h4>Please enter the name of the recipe to delete?</h4>
-            <Form.Control type="input" placeholder="Name (required)" name="delete" onChange={this.inputChange} />
+            <Form.Control type="input" placeholder="Name (required)" name="delete" onChange={this.pleaseWork} />
             </div>)
         }
         
@@ -52,6 +52,12 @@ export class RecipeForm extends Component {
             [e.target.name]: e.target.value
         })
     }
+
+    pleaseWork = e => {
+        this.setState({
+            name: e.target.value
+        })
+    }
     
     setCheckbox = (name, value) =>{
         this.setState({
@@ -76,28 +82,37 @@ export class RecipeForm extends Component {
 
     
     submitForm = (e) =>{
+        console.log(this.props)
         
-        let url = ""
+        let dinner = ""
         if (this.props.method === "POST"){
-            url = `https://getcookingwithjon.herokuapp.com/${this.props.type}/`
+            dinner = `https://getcookingwithjon.herokuapp.com/${this.props.type}`
+        }
+        else if (this.props.method === "PUT") {
+            dinner = `https://getcookingwithjon.herokuapp.com/${this.props.type}/add/${this.state.name}`
         }
         else {
-            url = `https://getcookingwithjon.herokuapp.com/${this.props.type}/${this.state.name}`
+            dinner = `https://getcookingwithjon.herokuapp.com/${this.props.type}/delete/${this.state.name}`
         }
         
+        console.log(dinner)
         const options = {
             "method": this.props.method
-            ,"headers" : { "Content-Type" : "application/json"}
+            ,"headers" : { "Content-Type" : "application/json" }
             ,body: JSON.stringify(this.state)
         }
 
-        fetch(url, options)
+        fetch(dinner, options)
             .then(res => res.json())
-            .then(res =>{
-                this.props.onSuccess({
-                    newName: res.name
-                    ,success: true
-                })
+            .then(res => {
+                console.log(res)
+                // this.props.onSuccess({
+                //     newName: res.name
+                //     ,success: true
+                // })
+            })
+            .catch(err => {
+                console.log(err)
             })
     }
 

@@ -162,10 +162,10 @@ class App extends Component {
              <Route path="/foodInfo/"
             render={() => <SubmissionForm  method="POST"/>}
             />
-            <Route path="/foodAddInfo/:add"
+            <Route path="/foodInfo/:add"
             render={() => <SubmissionForm  method="PUT"/>}
             />
-            <Route path="/foodDelInfo/:delete"
+            <Route path="/foodInfo/:delete"
             render={() => <SubmissionForm  method="DELETE" />}
             />
           </Col>

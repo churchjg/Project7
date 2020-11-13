@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Container, Col } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
+import "./Category.css"
 
 
 let url = "https://getcookingwithjon.herokuapp.com/"
@@ -60,18 +61,20 @@ export class Category extends Component {
     render() {
         return (
             <Container className="container">
+                <Row>
                 <Col>
+                
                     <div style={{ paddingLeft: 20, textAlign: "center" }}>
-                        <li style={{ listStyle: "none", fontSize: "20px", paddingTop: 20, textAlign: "center" }}>
+                        <ul style={{ listStyle: "none", fontSize: "20px", paddingTop: 20, textAlign: "center" }}>
                             <h2>Categories:</h2>
-                        </li>
-                    </div>
-                </Col>
-                <Col>
-                    <li style={{ listStyle: "none", fontSize: "20px", paddingTop: 20, textAlign: "center" }}>
+                        </ul>
+
+                    <li className="cat-column">
                         {this.state.categories}
                     </li>
+                    </div>
                 </Col>
+                </Row>
             </Container>
         )
     }
